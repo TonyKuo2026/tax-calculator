@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>房地合一稅 2.0 線上試算器</title>
+<style>
+:root{--bg:#f6f4ee;--card:#fff;--ink:#1d2a2e;--mut:#5d6b70;--line:#e3ded2;--pri:#0f6b64;--pri2:#d9efec;--hot:#c8442f;--hot2:#fbe5df;--gold:#b7791f;--gold2:#fbf0d9;--blue:#2b5f9e;--blue2:#e3edf8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121819;--card:#1b2325;--ink:#e8eeee;--mut:#9fb0b3;--line:#2c383a;--pri:#4fc3b8;--pri2:#16393a;--hot:#ff8a73;--hot2:#3d2420;--gold:#e8b45a;--gold2:#3a2f17;--blue:#86b4ee;--blue2:#1b2d44}}
+:root[data-theme="dark"]{--bg:#121819;--card:#1b2325;--ink:#e8eeee;--mut:#9fb0b3;--line:#2c383a;--pri:#4fc3b8;--pri2:#16393a;--hot:#ff8a73;--hot2:#3d2420;--gold:#e8b45a;--gold2:#3a2f17;--blue:#86b4ee;--blue2:#1b2d44}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+header{background:linear-gradient(135deg,#0f6b64,#16897f 60%,#c8883a);color:#fff;padding:40px 18px 34px;text-align:center}
+header h1{margin:0 0 6px;font-size:clamp(26px,6vw,38px);letter-spacing:2px}
+header p{margin:0;opacity:.92;font-size:15px}
+.w{max-width:960px;margin:0 auto;padding:18px 16px 50px;display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:820px){.w{grid-template-columns:1fr 1fr;align-items:start}.full{grid-column:1/-1}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+h2{font-size:19px;margin:0 0 12px}
+label{display:block;font-size:14px;font-weight:600;margin:12px 0 4px}
+label small{color:var(--mut);font-weight:400}
+input,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+input:focus,select:focus{outline:2px solid var(--pri);border-color:transparent}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;gap:8px;align-items:center;margin:12px 0 0;font-size:15px}
+.chk input{width:auto}
+.big{background:var(--pri2);border-radius:14px;padding:16px;text-align:center}
+.big .v{font-size:36px;font-weight:800;color:var(--hot);line-height:1.2}
+.big .s{font-size:14px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;font-size:15px;margin-top:10px}
+td{padding:7px 4px;border-bottom:1px solid var(--line)}
+td:last-child{text-align:right;font-weight:600;white-space:nowrap}
+.msg{border-radius:12px;padding:10px 14px;margin-top:10px;font-size:14px;background:var(--gold2)}
+.ok{background:var(--pri2)}
+.bar{display:flex;align-items:center;gap:8px;margin:7px 0;font-size:13px}
+.bar .t{width:70px;flex:none}
+.bar .f{height:22px;border-radius:6px;min-width:3px;transition:width .3s}
+.bar.on .t{font-weight:800}
+button{padding:10px 16px;border:0;border-radius:10px;background:var(--pri);color:var(--bg);font:inherit;font-weight:700;cursor:pointer;margin-top:14px}
+button.g{background:var(--line);color:var(--ink);margin-left:6px}
+footer{font-size:13px;color:var(--mut);line-height:1.6}
+</style>
+</head>
+<body>
+<header><svg viewBox="0 0 200 200" width="92" height="92" style="display:block;margin:0 auto 6px"><circle cx="100" cy="100" r="96" fill="#ffc93c"/><rect x="92" y="118" width="16" height="52" fill="#ff7a45" stroke="#20325b" stroke-width="5"/><rect x="108" y="134" width="16" height="10" rx="3" fill="#ff7a45" stroke="#20325b" stroke-width="4"/><rect x="108" y="152" width="12" height="10" rx="3" fill="#ff7a45" stroke="#20325b" stroke-width="4"/><rect x="64" y="22" width="72" height="100" rx="16" fill="#ff7a45" stroke="#20325b" stroke-width="5"/><rect x="76" y="36" width="15" height="15" rx="3" fill="#fff" stroke="#20325b" stroke-width="3"/><rect x="109" y="36" width="15" height="15" rx="3" fill="#fff" stroke="#20325b" stroke-width="3"/><circle cx="86" cy="82" r="6" fill="#20325b"/><circle cx="114" cy="82" r="6" fill="#20325b"/><circle cx="76" cy="95" r="5" fill="#ffc93c"/><circle cx="124" cy="95" r="5" fill="#ffc93c"/><path d="M88 94 Q100 108 112 94" fill="none" stroke="#20325b" stroke-width="5" stroke-linecap="round"/></svg><h1>房地合一稅 2.0 線上試算器</h1><p>輸入交易資料，立即估算稅額、自住優惠與重購退稅</p><p style="margin-top:8px;font-weight:700;color:#ffd98a">房子的事，先來算一算</p></header>
+<div class="w">
+
+<div class="card">
+<h2>① 交易資料（單位：萬元）</h2>
+<label>出售價格（房＋地）</label><input id="sell" type="number" min="0" step="any" placeholder="例：1500" inputmode="decimal">
+<label>取得成本 <small>當初買入總價</small></label><input id="cost" type="number" min="0" step="any" placeholder="例：1000" inputmode="decimal">
+<label>費用 <small>仲介費、代書費、整修等（需憑證）</small></label><input id="fee" type="number" min="0" step="any" placeholder="例：40" inputmode="decimal">
+<label>土地漲價總數額 <small>土增稅核定書上的數額</small></label><input id="land" type="number" min="0" step="any" placeholder="例：10" inputmode="decimal">
+<label>可扣除的前 3 年房地交易損失 <small>無則填 0</small></label><input id="loss" type="number" min="0" step="any" placeholder="0" inputmode="decimal">
+</div>
+
+<div class="card">
+<h2>② 持有與身分</h2>
+<label>持有期間</label>
+<div class="row"><input id="yy" type="number" min="0" step="1" placeholder="年" inputmode="numeric"><input id="mm" type="number" min="0" max="11" step="1" placeholder="月" inputmode="numeric"></div>
+<label>納稅人身分</label>
+<select id="who"><option value="r">境內居住者（個人）</option><option value="n">非境內居住者（個人）</option></select>
+<label>適用情況</label>
+<select id="kind">
+<option value="g">一般交易（無優惠）</option>
+<option value="s">自住房地（設籍居住連續滿 6 年等條件）</option>
+<option value="v">持有 5 年內非自願出售（20%）</option>
+</select>
+<label>出售權利範圍 <small>1 = 全部；賣 6 成填 0.6，影響 400 萬免稅額</small></label>
+<input id="share" type="number" min="0.01" max="1" step="0.01" value="1" inputmode="decimal">
+<label>重購價額 <small>若 2 年內換屋自住，填新屋買價；不適用請留空</small></label>
+<input id="re" type="number" min="0" step="any" placeholder="例：1800" inputmode="decimal">
+<button id="go" type="button">開始試算</button><button id="rs" type="button" class="g">清除</button>
+</div>
+
+<div class="card full" id="out" hidden>
+<h2>③ 試算結果</h2>
+<div class="big"><div class="s">預估應納房地合一稅</div><div class="v" id="tax">0</div><div class="s" id="sub"></div></div>
+<table id="tb"></table>
+<div id="note"></div>
+</div>
+
+<div class="card full" id="cmp" hidden>
+<h2>④ 持有期間比較：同樣所得，不同持有年限的稅額</h2>
+<div id="bars"></div>
+</div>
+
+<div class="card full" style="text-align:center"><b>算完有疑問？</b><br>每個人的情況不太一樣，歡迎直接聊聊，不用不好意思。<br><a href="tel:0910009710" style="color:var(--pri);font-weight:700">📞 0910-009-710</a>　<span style="font-weight:700">💬 LINE ID：tony7.21</span><div style="margin-top:12px"><img src="data:image/png;base64,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" alt="Tony 的 LINE QR Code" width="140" height="140" style="border-radius:12px;border:1px solid var(--line);background:#fff"><div style="font-size:13px;color:var(--mut)">掃描加 LINE 好友</div></div></div>
+<div class="card full"><footer>
+<b>試算提供</b>：信義房屋塭仔圳重劃店 店長 郭庭瑋（Tony）｜手機：0910-009-710｜LINE ID：tony7.21<br><b>重要聲明</b>：本試算器依個人房地合一稅 2.0 規定（稅率 45%／35%／20%／15%、自住 10% 與 400 萬免稅、重購退稅公式）做概算，僅供教學與參考，不構成稅務意見。實際稅額以國稅局核定為準，部分情形（如特定股權、預售屋、成本物價指數調整、非自願認定）未納入。申報期限為移轉登記次日起 30 日內。官方試算與諮詢：財政部稅務入口網、國稅局 0800-000321。資料不會上傳，僅在您的瀏覽器計算。</footer></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const n=id=>{const v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0};
+const f=x=>(Math.round(x*100)/100).toLocaleString('zh-TW',{maximumFractionDigits:2});
+function rate(m,who,kind){
+  if(who==='n')return m<=24?.45:.35;
+  if(kind==='v'&&m<=60)return .20;
+  return m<=24?.45:m<=60?.35:m<=120?.20:.15;
+}
+function calc(){
+  const sell=n('sell'),cost=n('cost'),fee=n('fee'),land=n('land'),loss=n('loss'),re=n('re');
+  let share=parseFloat($('share').value);if(!(share>0&&share<=1))share=1;
+  const m=n('yy')*12+Math.floor(n('mm')),who=$('who').value,kind=$('kind').value;
+  if(!sell){alert('請先輸入出售價格');return}
+  const gain=sell-cost-fee-land;
+  const income=gain-loss;
+  const rows=[['出售價格',f(sell)],['－ 取得成本',f(cost)],['－ 費用',f(fee)],['－ 土地漲價總數額',f(land)]];
+  if(loss)rows.push(['－ 前 3 年交易損失',f(loss)]);
+  rows.push(['＝ 課稅所得',f(income)+' 萬']);
+  let tax=0,notes=[],r=rate(m,who,kind),taxable=Math.max(income,0);
+  let selfOk=kind==='s'&&who==='r';
+  if(kind==='s'&&who==='n')notes.push(['非境內居住者不適用自住優惠，已改按一般稅率計算。','']);
+  if(kind==='v'&&who==='n')notes.push(['非境內居住者不適用非自願 20% 稅率，已改按一般稅率計算。','']);
+  if(kind==='v'&&who==='r'&&m>60)notes.push(['持有已逾 5 年，非自願 20% 不適用，改按持有期間稅率。','']);
+  if(selfOk){
+    if(m<72)notes.push(['您選擇自住，但持有未滿 6 年，通常不符合「連續設籍居住滿 6 年」，請確認；以下仍按自住計算。','']);
+    const ex=400*share;
+    rows.push(['適用稅率','10%']);
+    rows.push(['自住免稅額（400 萬×持分 '+f(share)+'）',f(ex)+' 萬']);
+    taxable=Math.max(income-ex,0);r=.10;
+    rows.push(['＝ 應稅所得',f(taxable)+' 萬']);
+  }else{
+    rows.push(['適用稅率',(r*100)+'%（持有 '+Math.floor(m/12)+' 年 '+(m%12)+' 月）']);
+  }
+  tax=taxable*r;
+  rows.push(['＝ 應納稅額',f(tax)+' 萬']);
+  let refund=0;
+  if(re>0){
+    if(tax>0){refund=Math.min(tax,tax*re/sell);
+      rows.push(['重購退稅（稅額×重購價÷售價）',f(refund)+' 萬']);
+      rows.push(['＝ 退稅後實際稅負',f(tax-refund)+' 萬']);
+      notes.push(['重購退稅須：2 年內賣舊買新、新舊屋皆本人／配偶／未成年子女設籍並居住、無出租營業，且新屋 5 年內不得出售或改作他用，否則追繳。',''])
+    }else notes.push(['稅額為 0，無須退稅。',''])
+  }
+  $('tax').textContent=f(tax-refund)+' 萬元';
+  $('sub').textContent=income<0?'本次為交易損失 '+f(-income)+' 萬，不課稅，申報後可於 3 年內扣抵':(re>0&&refund>0?'已含重購退稅 '+f(refund)+' 萬（原稅額 '+f(tax)+' 萬）':'有效稅率約 '+(income>0?f((tax/income)*100):'0')+'%（占課稅所得）');
+  $('tb').innerHTML=rows.map(x=>'<tr><td>'+x[0]+'</td><td>'+x[1]+'</td></tr>').join('');
+  $('note').innerHTML=notes.map(x=>'<div class="msg">'+x[0]+'</div>').join('')+(income>0?'<div class="msg ok">提醒：移轉登記次日起 30 日內須向國稅局申報。</div>':'<div class="msg ok">有損失也須依限申報，才可保留損失扣抵權益。</div>');
+  $('out').hidden=false;
+  // compare
+  if(income>0&&!selfOk){
+    const lv=[['≤2 年',.45,12,'var(--hot)'],['2～5 年',.35,36,'var(--gold)'],['5～10 年',.20,84,'var(--blue)'],['>10 年',.15,132,'var(--pri)']];
+    const cur=rate(m,who,kind);
+    $('bars').innerHTML=lv.map(l=>{const t=income*l[1];return '<div class="bar'+(l[1]===cur?' on':'')+'"><span class="t">'+l[0]+'</span><span class="f" style="width:'+(l[1]/.45*60)+'%;background:'+l[3]+'"></span><span>'+f(t)+' 萬</span></div>'}).join('')+'<small style="color:var(--mut)">粗體為目前適用級距（以一般稅率比較，未含優惠）。</small>';
+    $('cmp').hidden=false;
+  }else $('cmp').hidden=true;
+  $('out').scrollIntoView({behavior:'smooth'});
+}
+$('go').onclick=calc;
+$('rs').onclick=()=>{document.querySelectorAll('input').forEach(i=>i.value='');$('share').value=1;$('out').hidden=true;$('cmp').hidden=true};
+</script>
+</body>
+</html>
